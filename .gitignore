@@ -1,0 +1,8 @@
+dbt/target/
+dbt/dbt_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo               

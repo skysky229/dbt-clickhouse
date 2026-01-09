@@ -2,6 +2,8 @@ FROM python:3.11-slim
 
 RUN pip install --no-cache-dir dbt-core dbt-clickhouse
 
+RUN pip install "apache-airflow-providers-cncf-kubernetes>=8.3.0"
+
 COPY ../dbt/ /usr/app/dbt_project
 WORKDIR /usr/app/dbt_project
 
