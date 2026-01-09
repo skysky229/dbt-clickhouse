@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: thelook
+    description: "Raw eCommerce data from TheLook dataset"
+    database: thelook 
+    tables:
+      - name: users
+      - name: orders
+      - name: products
+      - name: order_items
+      - name: events
+      - name: distribution_centers
+      - name: inventory_items

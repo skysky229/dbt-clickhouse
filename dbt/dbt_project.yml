@@ -1,0 +1,31 @@
+name: 'dbt-clickhouse'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'clickhouse'
+
+# These settings specify where dbt should look for different types of files.
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configuring models
+models:
+  dbt_clickhouse:
+    +engine: "ReplicatedMergeTree('/clickhouse/tables/{shard}/{{ model.schema }}/{{ model.name }}', '{replica}')"
+    +order_by: 'tuple()'
+    +incremental_strategy: 'delete+insert'
+    +cluster: 'default'
+    
+    generated:
+      +schema: 'generated'
+      +materialized: table

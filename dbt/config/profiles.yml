@@ -1,0 +1,20 @@
+clickhouse:
+  target: dev
+  outputs:
+    dev:
+      type: clickhouse
+      host: clickhouse
+      port: 8123
+      user: "{{ env_var('CLICKHOUSE_USER', 'default')}}"
+      password: "{{ env_var('CLICKHOUSE_PASSWORD', '') }}"
+      database: thelook
+      schema: public # dbt-clickhouse often uses 'database' as 'schema'
+      # Optional settings
+      # secure: False
+      # verify: False
+      # connect_timeout: 10
+      # send_receive_timeout: 300
+      # sync_request_timeout: 5
+      # compress: True
+      # settings:
+      #   mutations_sync: 1
