@@ -27,13 +27,14 @@ INSERT INTO thelook.inventory_items
     id, product_id, created_at, sold_at, cost, 
     product_category, product_name, product_brand, 
     product_retail_price, product_department, 
-    product_sku, product_distribution_center_id
+    product_sku, product_distribution_center_id,
+    sys_effective_date, sys_create_date
 )
 SELECT 
     id, 
     product_id, 
-    parseDateTimeBestEffortOrZero(created_at_str) AS created_at,
-    parseDateTimeBestEffortOrNull(sold_at_str) AS sold_at,
+    substring(created_at, 1, 19) AS created_at,
+    substring(sold_at, 1, 19)AS sold_at,
     cost,
     product_category, 
     product_name, 
@@ -41,11 +42,12 @@ SELECT
     product_retail_price, 
     product_department, 
     product_sku, 
-    product_distribution_center_id
+    product_distribution_center_id,
+    sys_effective_date,
+    sys_create_date
 FROM s3(
     'https://load-data-clickhouse.s3.ap-southeast-1.amazonaws.com/thelook_ecommerce.inventory_items.csv', 
     '', 
     '', 
-    'CSVWithNames',
-    'id UInt32, product_id UInt32, created_at_str String, sold_at_str String, cost Decimal(18, 4), product_category LowCardinality(String), product_name String, product_brand LowCardinality(String), product_retail_price Decimal(18, 4), product_department LowCardinality(String), product_sku String, product_distribution_center_id UInt32'
+    'CSVWithNames'
 );
