@@ -1,3 +1,3 @@
 SELECT
   *
-FROM {{ source('thelook', 'users') }} LIMIT 10  
+FROM {{ source('thelook', 'users') }}
