@@ -8,3 +8,7 @@ build:
 
 push:
 	docker push $(IMAGE_NAME):$(TAG)
+
+all:
+	make build
+	make push

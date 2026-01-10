@@ -5,8 +5,8 @@ clickhouse:
       type: clickhouse
       host: clickhouse
       port: 8123
-      user: "{{ env_var('CLICKHOUSE_USER', 'default')}}"
-      password: "{{ env_var('CLICKHOUSE_PASSWORD', '') }}"
+      user: "{{ env_var('username', 'default')}}"
+      password: "{{ env_var('password', '') }}"
       database: thelook
       schema: public # dbt-clickhouse often uses 'database' as 'schema'
       # Optional settings
