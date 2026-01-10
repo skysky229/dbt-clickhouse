@@ -17,6 +17,17 @@ with DAG(
     catchup=False,
     tags=['dbt', 'clickhouse'],
 ) as dag:
+    compile_stg_users = KubernetesPodOperator(
+        task_id='compile_stg_users',
+        name='compile-stg-users',
+        namespace='dbt-clickhouse',
+        image='skysky229/dbt-clickhouse:latest',
+        env_from=[k8s.V1EnvFromSource(secret_ref=ch_user_secret)],
+        arguments=['compile', '--select', 'stg_users'],
+        get_logs=True,
+        # Airflow 3 favors more explicit cleanup actions
+        on_finish_action='delete_pod', 
+    )
 
     run_stg_users = KubernetesPodOperator(
         task_id='run_stg_users',
@@ -29,3 +40,5 @@ with DAG(
         # Airflow 3 favors more explicit cleanup actions
         on_finish_action='delete_pod', 
     )
+    
+    compile_stg_users >> run_stg_users

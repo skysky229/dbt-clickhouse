@@ -3,12 +3,13 @@ clickhouse:
   outputs:
     dev:
       type: clickhouse
-      host: clickhouse
+      host: clickhouse.clickhouse.svc.cluster.local
       port: 8123
       user: "{{ env_var('username', 'default')}}"
       password: "{{ env_var('password', '') }}"
       database: thelook
-      schema: public # dbt-clickhouse often uses 'database' as 'schema'
+      schema: thelook
+      cluster: default
       # Optional settings
       # secure: False
       # verify: False

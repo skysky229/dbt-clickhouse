@@ -1,4 +1,4 @@
-name: 'dbt-clickhouse'
+name: 'dbt_pipeline_clickhouse'
 version: '1.0.0'
 config-version: 2
 
@@ -21,7 +21,7 @@ clean-targets:
 # Configuring models
 models:
   dbt_clickhouse:
-    +engine: "ReplicatedMergeTree('/clickhouse/tables/{shard}/{{ model.schema }}/{{ model.name }}', '{replica}')"
+    +engine: "ReplicatedMergeTree('/clickhouse/tables/{shard}/{database}/{table}', '{replica}')"
     +order_by: 'tuple()'
     +incremental_strategy: 'delete+insert'
     +cluster: 'default'

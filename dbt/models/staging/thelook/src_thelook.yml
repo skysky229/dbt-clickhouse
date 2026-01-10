@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: thelook
     description: "Raw eCommerce data from TheLook dataset"
-    database: thelook 
+    schema: thelook 
     tables:
       - name: users
       - name: orders
