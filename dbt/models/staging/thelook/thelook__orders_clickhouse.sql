@@ -8,7 +8,10 @@ CREATE TABLE IF NOT EXISTS thelook.orders_local ON CLUSTER 'default'
     returned_at Nullable(DateTime),
     shipped_at Nullable(DateTime),
     delivered_at Nullable(DateTime),
-    num_of_item UInt32
+    num_of_item UInt32,
+    updated_at DATETIME DEFAULT MAX(created_at, shipped_at, delivered_at, returned_at),
+    sys_create_date DateTime DEFAULT now(),
+    sys_effective_date DateTime DEFAULT updated_at
 )
 ENGINE = ReplicatedMergeTree('/clickhouse/tables/{shard}/{database}/{table}', '{replica}')
 PARTITION BY toYYYYMMDD(created_at)

@@ -1,0 +1,13 @@
+{% snapshot orders_snapshot %}
+{{
+     config(
+          target_schema='snapshots',
+          unique_key='order_id',
+          strategy='check',
+          check_cols=['status', 'updated_at']
+     )
+}}
+
+SELECT * FROM {{ source('thelook', 'orders') }}
+
+{% endsnapshot %}

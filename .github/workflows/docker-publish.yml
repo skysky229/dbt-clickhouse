@@ -4,8 +4,12 @@ on:
   push:
     branches: [ "master" ]
     tags: [ 'v*.*.*' ]
+    paths:
+      - 'dbt/**'
   pull_request:
     branches: [ "master" ]
+    paths:
+      - 'dbt/**'
 
 env:
   IMAGE_NAME: skysky229/dbt-clickhouse
