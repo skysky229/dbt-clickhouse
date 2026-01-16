@@ -38,8 +38,7 @@ with DAG(
         env_from=[k8s.V1EnvFromSource(secret_ref=ch_user_secret)],
         # Run only the specific snapshot
         arguments=['snapshot', '--select', 'orders_snapshot'],
-        get_logs=True,
-        on_finish_action='delete_pod',
+        get_logs=True
     )
 
     # # 2. Intermediate Task: Calculate daily metrics
