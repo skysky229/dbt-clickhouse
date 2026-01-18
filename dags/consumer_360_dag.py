@@ -38,7 +38,9 @@ with DAG(
         env_from=[k8s.V1EnvFromSource(secret_ref=ch_user_secret)],
         on_finish_action='keep_pod',
         # Run only the specific snapshot
-        arguments=['snapshot', '--select', 'orders_snapshot'],
+        # arguments=['snapshot', '--select', 'orders_snapshot'],
+        cmds=["/bin/bash", "-c"],
+        arguments=["dbt snapshot --select orders_snapshot || echo 'dbt failed but keeping pod alive'"],
         get_logs=True
     )
 

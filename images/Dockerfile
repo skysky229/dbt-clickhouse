@@ -11,5 +11,3 @@ RUN pip install --no-cache-dir \
 COPY dbt/ /usr/app/dbt_project
 COPY dbt/config/profiles.yml /root/.dbt/profiles.yml
 WORKDIR /usr/app/dbt_project
-
-ENTRYPOINT ["dbt"]
