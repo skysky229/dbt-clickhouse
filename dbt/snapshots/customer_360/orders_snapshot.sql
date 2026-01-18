@@ -8,6 +8,6 @@
      )
 }}
 
-SELECT * FROM {{ source('thelook', 'orders') }}
+SELECT *, updated_at FROM {{ source('thelook', 'orders') }}
 
 {% endsnapshot %}
